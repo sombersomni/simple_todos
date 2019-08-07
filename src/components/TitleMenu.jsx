@@ -6,6 +6,7 @@ const TitleContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 300px;  
+    padding: 0px 20px;
 `;
 
 const ListItem = styled.li`
@@ -16,7 +17,7 @@ const ListItem = styled.li`
 export default function TitleMenu() {
     return (
         <TitleContainer>
-            <h1 style={{ fontFamily: '' }}>Todo Demo</h1>
+            <h1 style={{ color: '#009ACF' }}>React Todo Demo</h1>
             <h3>Keep track of what you need to do for the day with this app</h3>
             <h5 style={{ marginBottom: -10 }}>Instructions</h5>
             <ul>

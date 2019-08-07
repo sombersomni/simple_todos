@@ -29,7 +29,10 @@ const InputContainer = styled.div`
     display: flex;
     flex-direction: row;
 `;
-
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 export default function Todos() {
     const [todos, setTodos] = useState(['Walk the dog']);
     const inputRef = useRef(null);
@@ -52,7 +55,7 @@ export default function Todos() {
         }
     }
     return (
-        <React.Fragment>
+        <Container>
             <InputContainer>
                 <input 
                     style={inputStyle}
@@ -67,7 +70,7 @@ export default function Todos() {
                 </AddButton>
             </InputContainer>
             <TodosContainer>
-                <h1>Todos</h1>
+                <h2>Todos</h2>
                 { todos.map((todo, i) => <Todo 
                     removeTodo={removeTodo}
                     i={i}
@@ -75,6 +78,6 @@ export default function Todos() {
                     last={i === todos.length - 1}
                     todo={todo} />)}
             </TodosContainer>
-        </React.Fragment>
+        </Container>
     )
 }
