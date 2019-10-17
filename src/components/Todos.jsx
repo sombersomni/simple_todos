@@ -25,7 +25,7 @@ const AddButton = styled.button`
     }
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
     display: flex;
     flex-direction: row;
     height: 40px;
@@ -85,17 +85,18 @@ export default function Todos({ primaryColor }) {
     return (
         <Container>
             <DetailContainer>
-                <InputContainer>
-                    <input
-                        style={inputStyle}
-                        type='text'
-                        ref={inputRef}
-                        placeholder="Create a todo" />
-                    <AddButton onClick={() => {
-                        setTodos(todos.concat(inputRef.current.value.trim()))
-                        inputRef.current.value = '';
-                    }}>
-                        Add Todo
+                    <InputContainer onSubmit={e => {
+                            e.preventDefault();
+                            setTodos(todos.concat(inputRef.current.value.trim()));
+                            inputRef.current.value = '';
+                        }}>
+                        <input
+                            style={inputStyle}
+                            type='text'
+                            ref={inputRef}
+                            placeholder="Create a todo" />
+                        <AddButton type='submit'>
+                            Add Todo
                 </AddButton>
                 </InputContainer>
                 <Instructions>
