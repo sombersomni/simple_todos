@@ -19,10 +19,18 @@ library.add(
 );
 
 export default function App() {
+  const primaryColor = '#009ACF';
+  const secondaryColor = '#fcee58';
+  const thirdColor = '#ffce3d';
+  const style = {
+    background: `linear-gradient(${secondaryColor}, ${thirdColor})`
+  }
   return (
-    <div className='App'>
-        <TitleMenu />
-        <Todos />
+    <div 
+      className='App'
+      style={style}>
+        <TitleMenu primaryColor={primaryColor} />
+        <Todos primaryColor={primaryColor} />
     </div>
   );
 }

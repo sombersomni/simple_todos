@@ -17,10 +17,13 @@ const TitleContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-
     max-width: 60vw;
     min-width: 300px;
-`;
+    background: white;
+    padding: 5px 25px;
+    border-radius: 25px;
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.3)
+    `;
 
 const Title = styled.div`
     display: flex;
@@ -35,18 +38,19 @@ const IconContainer = styled.div`
     color: ${props => props.primaryColor || 'blue'}
 `;
 
-export default function TitleMenu() {
-    const primaryColor = '#009ACF';
+export default function TitleMenu({primaryColor}) {
+    
     return (
         <Container>
             <TitleContainer>
                 <Title>
                     <h1 style={{
                         color: primaryColor,
-                        fontSize: '3em'
-                    }}>React Todo Demo</h1>
+                        fontSize: '2em',
+                        marginBottom: -5
+                    }}>Simple Todos</h1>
                     <h4 style={{
-                        padding: '0px 25px'
+                        padding: '0px 10px'
                     }}> Keep track of what you need to do for the day with this app</h4>
                 </Title>
                 <IconContainer primaryColor={primaryColor}>

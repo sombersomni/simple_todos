@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from 'react-spring';
+import { Spring } from 'react-spring/renderprops';
 //components
 import ArrowTooltip from './Tooltips.jsx';
 
 const TodoContainer = styled.div`
-    background: #CCC;
+    background: ${props => props.primaryColor || '#e9ffff'};
     border-radius: ${props => props.last ? '0px 0px 10px 10px' : '0px'};
-    padding: 10px;
+    padding: 5px 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -16,7 +18,7 @@ const TodoContainer = styled.div`
     transition: opacity 1s;
     cursor: pointer;
     &:hover {
-        opacity: 0.6;
+        opacity: 0.8;
     }
 `;
 const TodoText = styled.div`
@@ -40,7 +42,7 @@ const Button = styled.div`
         opacity: 0.6;
     }
 `;
-export default function Todo({ todo, last, i, removeTodo }) {
+export default function Todo({ todo, last, i, removeTodo, primaryColor }) {
     const [status, setStatus] = useState('circle');
     const style = {
         color: setColor(status)
@@ -77,35 +79,43 @@ export default function Todo({ todo, last, i, removeTodo }) {
             default:
                 setStatus('circle')
                 break;
-        } 
+        }
     }
-
+    const iconSize = 1;
     return (
-        <TodoContainer 
-            last={last}
-            onClick={() => { toggleOptions(status) }}>
-            <IconContainer>
-                <ArrowTooltip title='close'>
-                    <Button>
-                        <FontAwesomeIcon
-                            onClick={() => { removeTodo(i) }}
-                            size='2x'
-                            style={{ color: '#AA002C' }}
-                            icon={['fal', 'times-circle']} />
-                    </Button>
-                </ArrowTooltip>
-                <ArrowTooltip title={setTitle(status)}>
-                    <Button>
-                        <FontAwesomeIcon
-                            size='2x'
-                            style={style}
-                            icon={['fal', status]} />
-                    </Button>
-                </ArrowTooltip>
-            </IconContainer>
-            <TodoText status={status}>
-                {todo}
-            </TodoText>
-        </TodoContainer>
+        <Spring
+            config={config.wobbly}
+            from={{ opacity: 0, height: 0 }}
+            to={{ opacity: 1, height: 'auto' }}>
+            {props => (<TodoContainer
+                primaryColor={primaryColor}
+                last={last}
+                onClick={() => { toggleOptions(status) }}
+                style={{...props}}>
+                <IconContainer>
+                    <ArrowTooltip title='close'>
+                        <Button>
+                            <FontAwesomeIcon
+                                onClick={() => { removeTodo(i) }}
+                                size={`${iconSize}x`}
+                                style={{ color: '#AA002C' }}
+                                icon={['fal', 'times-circle']} />
+                        </Button>
+                    </ArrowTooltip>
+                    <ArrowTooltip title={setTitle(status)}>
+                        <Button>
+                            <FontAwesomeIcon
+                                size={`${iconSize}x`}
+                                style={style}
+                                icon={['fal', status]} />
+                        </Button>
+                    </ArrowTooltip>
+                </IconContainer>
+                <TodoText status={status}>
+                    {todo}
+                </TodoText>
+            </TodoContainer>)}
+        </Spring>
+
     )
 }
