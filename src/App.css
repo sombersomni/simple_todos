@@ -1,15 +1,10 @@
 .App {
+  position: relative;
   text-align: center;
   width: 100vw;
-  min-height: git100vh;
+  min-height: 100vh;
   margin: 0px;
   color: #1B1B3A;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-
 }
 
 .App-logo {

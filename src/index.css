@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:300,300i,400,700|Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli:300,300i,400,700|Bowlby+One+SC&display=swap');
 
 body {
   margin: 0;
@@ -8,8 +8,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-h1, h2 {
-  font-family: "Rubik Mono One", sans-serif;
+h1, h2, h3 {
+  font-family: "Bowlby One SC", cursive;
 }
 button {
   cursor: pointer;

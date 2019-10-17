@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Todo from './Todo.jsx';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckCircle, faCircle, faBan, faTimesCircle } from '@fortawesome/pro-light-svg-icons'
-library.add(faCheckCircle, faCircle, faBan, faTimesCircle);
 
 const TodosContainer = styled.div`
     min-width: 300px;
@@ -33,6 +31,17 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+const ListItem = styled.li`
+    margin-top: 5px;
+    list-style: none;
+    text-align: left;
+`;
+
+const Instructions = styled.div`
+
+`;
+
 export default function Todos() {
     const [todos, setTodos] = useState(['Walk the dog']);
     const inputRef = useRef(null);
@@ -47,7 +56,7 @@ export default function Todos() {
     })
 
     function removeTodo(i) {
-        if(todos.length > 0) {
+        if (todos.length > 0) {
             let newTodos = todos.slice()
             newTodos.splice(i, 1);
             console.log(newTodos);
@@ -57,24 +66,50 @@ export default function Todos() {
     return (
         <Container>
             <InputContainer>
-                <input 
+                <input
                     style={inputStyle}
-                    type='text' 
-                    ref={inputRef} 
-                    placeholder="Enter a task"/>
-                <AddButton onClick={() => { 
+                    type='text'
+                    ref={inputRef}
+                    placeholder="Enter a task" />
+                <AddButton onClick={() => {
                     setTodos(todos.concat(inputRef.current.value.trim()))
                     inputRef.current.value = '';
-                    }}>
+                }}>
                     Add Todo
                 </AddButton>
+                <Instructions>
+                    <h5 style={{ marginBottom: -10 }}>Instructions</h5>
+                    <ul>
+                        <ListItem>
+                            <FontAwesomeIcon
+                                style={{ color: '#AA002C' }}
+                                icon={['fal', 'times-circle']} />
+                            &nbsp;
+                            Click to remove todo
+                </ListItem>
+                        <ListItem>
+                            <FontAwesomeIcon
+                                style={{ color: '#00AF22' }}
+                                icon={['fal', 'check-circle']} />
+                            &nbsp;
+                            Click a todo to mark as completed
+                </ListItem>
+                        <ListItem>
+                            <FontAwesomeIcon
+                                style={{ color: '#AA002C' }}
+                                icon={['fal', 'ban']} />
+                            &nbsp;
+                            Click a todo again to mark as canceled
+                </ListItem>
+                    </ul>
+                </Instructions>
             </InputContainer>
             <TodosContainer>
                 <h2>Todos</h2>
-                { todos.map((todo, i) => <Todo 
+                {todos.map((todo, i) => <Todo
                     removeTodo={removeTodo}
                     i={i}
-                    key={i.toString()} 
+                    key={i.toString()}
                     last={i === todos.length - 1}
                     todo={todo} />)}
             </TodosContainer>
